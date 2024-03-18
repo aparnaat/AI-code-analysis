@@ -44,6 +44,10 @@ def scan(code, vuln, php_version):
 
     return lst_patched, lst_unpatched
 
+
+def on_key_release(event):
+    update_vulnerabilities()
+
 def update_vulnerabilities():
     global code_entry, vuln_patched_listbox, vuln_unpatched_listbox, vuln, php_version_entry
 
@@ -86,6 +90,7 @@ root.title("Code Vulnerability Scanner")
 
 # Code Entry
 code_entry = tk.Text(root, wrap="word", width=70, height=30)
+code_entry.bind("<KeyRelease>", on_key_release)
 code_entry.grid(row=1, column=0, padx=10, pady=10)
 
 # PHP Version Entry
@@ -95,7 +100,7 @@ php_version_entry = tk.Entry(root)
 php_version_entry.grid(row=0, column=1, padx=10, pady=5)
 
 # Update Button
-update_button = tk.Button(root, text="Check", command=start_operation)
+update_button = tk.Button(root, text="Update", command=start_operation)
 update_button.grid(row=0, column=2, padx=10, pady=5)
 
 # Patched Vulnerabilities Display
